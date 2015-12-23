@@ -65,4 +65,17 @@ Logback appender to forward log messages to a Flume agent
      </root>
  </configuration>
  ```
+ **更新**
+ * 添加app.event.type,根据logger.name 确定app.event.type 的值。
+ * 为了兼容log4j的收据方式，把header里的application的key值更改为"app.name"
  
+ **配置实例**
+ ```
+ <logger name="app.news.push" level="INFO">
+	<appender-ref ref="flume"/>
+ </logger>
+ ```
+ **在java 代码中声明 logger name**
+  ```
+  private static final Logger flume_logger = LoggerFactory.getLogger("app.news.push");
+  ```
