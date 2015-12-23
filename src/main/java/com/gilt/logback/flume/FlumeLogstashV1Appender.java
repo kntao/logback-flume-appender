@@ -199,14 +199,15 @@ public class FlumeLogstashV1Appender extends UnsynchronizedAppenderBase<ILogging
     headers.put("logger", eventObject.getLoggerName());
     headers.put("message", eventObject.getMessage());
     headers.put("level", eventObject.getLevel().toString());
+    headers.put("app.event.type",eventObject.getLoggerName());
     try {
-      headers.put("host", resolveHostname());
+      headers.put("app.source.host", resolveHostname());
     } catch (UnknownHostException e) {
       addWarn(e.getMessage());
     }
     headers.put("thread", eventObject.getThreadName());
     if (StringUtils.isNotEmpty(application)) {
-      headers.put("application", application);
+      headers.put("app.name", application);
     }
 
     if (StringUtils.isNotEmpty(type)) {
